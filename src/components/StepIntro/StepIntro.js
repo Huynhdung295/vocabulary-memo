@@ -91,7 +91,6 @@ function StepIntro(props) {
   const handleOnChangeLangDefault = (e) => {
     setOptLangDef(e.target.value);
     getLanguageDefault(e.target.value);
-    setOptLang("")
   };
   const handleOnChangeLang = (e) => {
     setOptLang(e.target.value);
@@ -175,9 +174,6 @@ function StepIntro(props) {
     if (activeStep === steps.length - 1) {
       history.push("/start");
     }
-    if(activeStep === 0){
-      setOptLang(1)
-    }
   };
 
   const handleBack = () => {
@@ -185,7 +181,8 @@ function StepIntro(props) {
   };
 
   return (
-    <div className={classes.root}>
+<div className="container">
+<div className={classes.root}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
@@ -245,6 +242,8 @@ function StepIntro(props) {
         ))}
       </Stepper>
     </div>
+ 
+</div>
   );
 }
 

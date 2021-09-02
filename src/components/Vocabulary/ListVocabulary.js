@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 function ListVocabulary(props) {
   return (
     <div className={props.className.grid}>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {props.listWord.map((item) => {
           return (
             <Grid key={item.id} item xl={3} lg={3} md={4} sm={6} xs={12}>

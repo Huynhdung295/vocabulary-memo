@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Box from "@material-ui/core/Box";
+
+import Grid from "@material-ui/core/Grid";
 
 function SelectLang(props) {
   let listLanguage = [
@@ -49,10 +50,10 @@ function SelectLang(props) {
   }));
   const classes = useStyles();
 
-  
   return (
-    <Box display="flex" alignItems="center">
-        <FormControl  variant="outlined" className={classes.formControl}>
+    <Grid container spacing={2}>
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+        <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel>Language</InputLabel>
           <Select
             native
@@ -70,7 +71,9 @@ function SelectLang(props) {
             })}
           </Select>
         </FormControl>
-        <FormControl  variant="outlined" className={classes.formControl}>
+      </Grid>
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+        <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel>Language</InputLabel>
           <Select
             native
@@ -88,7 +91,9 @@ function SelectLang(props) {
             })}
           </Select>
         </FormControl>
-        <FormControl  variant="outlined" className={classes.formControl}>
+      </Grid>
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+        <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel>Language</InputLabel>
           <Select
             native
@@ -106,7 +111,8 @@ function SelectLang(props) {
             })}
           </Select>
         </FormControl>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }
 

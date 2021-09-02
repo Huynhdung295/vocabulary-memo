@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
 function Vocabulary() {
   // Call Styles
   const classes = useStyles();
-//  Call history for button
-const history = useHistory()
+  //  Call history for button
+  const history = useHistory();
   // LocalStorage
   const setDataApp = (data) => localStorage.setItem("dataApp", data);
   const getDataApp = localStorage.getItem("dataApp");
@@ -229,17 +229,61 @@ const history = useHistory()
         statusLang3={statusLang3}
         statusValue={false}
       />
-      <Typography  variant="h5" component="h1">
+      <Typography variant="h5" component="h1">
         Ôn tập từ vựng
       </Typography>
-      <Button disabled={listWord.length < 5} className={classes.root} onClick = {()=> {history.push("/multiple")}} variant="contained" color="primary">
-        Làm trắc nghiệm
+      <Button
+        disabled={listWord.length < 5}
+        className={classes.root}
+        onClick={() => {
+          history.push("/multiple");
+        }}
+        variant="contained"
+        color="primary"
+      >
+        Làm trắc nghiệm (Easy)
       </Button>
       <p>(Trong từ điển của bạn tối thiểu phải có 5 từ)</p>
+      <Button
+        disabled={listWord.length < 10}
+        className={classes.root}
+        onClick={() => {
+          history.push("/multipleMed");
+        }}
+        variant="contained"
+        color="primary"
+      >
+        Làm trắc nghiệm (Medium)
+      </Button>
+      <p>(Trong từ điển của bạn tối thiểu phải có 10 từ)</p>
+      <Button
+        disabled={listWord.length < 15}
+        className={classes.root}
+        onClick={() => {
+          history.push("/multipleHar");
+        }}
+        variant="contained"
+        color="primary"
+      >
+        Làm trắc nghiệm (Hard)
+      </Button>
+      <p>(Trong từ điển của bạn tối thiểu phải có 15 từ)</p>
+      <Button
+        disabled={listWord.length < 20}
+        className={classes.root}
+        onClick={() => {
+          history.push("/multipleEx");
+        }}
+        variant="contained"
+        color="primary"
+      >
+        Làm trắc nghiệm (Expert)
+      </Button>
+      <p>(Trong từ điển của bạn tối thiểu phải có 20 từ)</p>
       <Typography variant="h5" component="h1">
         Danh sách từ vựng
       </Typography>
-  
+
       <ListVocabulary
         className={classes}
         defaultLang={defaultLang}

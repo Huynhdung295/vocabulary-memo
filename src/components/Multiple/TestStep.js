@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
@@ -16,7 +15,7 @@ import Fab from "@material-ui/core/Fab";
 import HomeIcon from "@material-ui/icons/Home";
 import BeforeSubmit from "./BeforeSubmit";
 
-
+import MobileStepper from "@material-ui/core/MobileStepper";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(1),
@@ -24,6 +23,18 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
     },
+  },
+  step: {
+    margin: theme.spacing(1),
+    width: "100%",
+    justifyContent: "center",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  wrapButton: {
+    display: "flex",
+    justifyContent: "space-between",
   },
   backButton: {
     marginRight: theme.spacing(1),
@@ -37,13 +48,13 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
   },
   absolute: {
-    position: "absolute",
-    bottom: theme.spacing(2),
+    position: "fixed",
+    bottom: theme.spacing(5),
     right: theme.spacing(3),
   },
 }));
 
-function MultipleApp() {
+function TestStep() {
   const classes = useStyles();
   // LocalStorage
   const getDataApp = localStorage.getItem("dataApp");
@@ -105,7 +116,6 @@ function MultipleApp() {
   if (activeStep === 0) statusDisabled = false;
   if (activeStep === 6) statusDisabled = false;
 
-
   // Get random
   const getRandom = (list) => {
     return list[Math.floor(Math.random() * list.length)];
@@ -121,6 +131,18 @@ function MultipleApp() {
   let newList4 = newList3.filter((data) => data !== randomQuestion4);
   const randomQuestion5 = getRandom(newList4);
 
+  const setValueInput = (ans) => {
+    if (ans === undefined || ans === null || ans === "") {
+      setInput1("");
+      setInput2("");
+      setInput3("");
+    } else {
+      setInput1(ans[0]);
+      setInput2(ans[1]);
+      setInput3(ans[2]);
+    }
+  };
+
   // Submit Form
   const submitForm = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -130,10 +152,13 @@ function MultipleApp() {
     if (activeStep === 4) setAnswer4([input1, input2, input3]);
     if (activeStep === 5) setAnswer5([input1, input2, input3]);
 
-    setInput1("");
-    setInput2("");
-    setInput3("");
+    if (activeStep === 0) setValueInput(answer1);
+    if (activeStep === 1) setValueInput(answer2);
+    if (activeStep === 2) setValueInput(answer3);
+    if (activeStep === 3) setValueInput(answer4);
+    if (activeStep === 4) setValueInput(answer5);
   };
+
   useEffect(() => {
     setQuestion1(randomQuestion1);
     setQuestion2(randomQuestion2);
@@ -154,7 +179,6 @@ function MultipleApp() {
       "Result",
     ];
   }
-
 
   function getStepContent(stepIndex) {
     switch (stepIndex) {
@@ -348,7 +372,6 @@ function MultipleApp() {
             </Grid>
           </div>
         );
-
       default:
         return "Unknown stepIndex";
     }
@@ -387,79 +410,35 @@ function MultipleApp() {
 
   const handleReset = () => {
     setActiveStep(0);
+    setAnswer1();
+    setAnswer2();
+    setAnswer3();
+    setAnswer4();
+    setAnswer5();
   };
   return (
-    <div className="container-fluid">
-         <div className={classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      <div>
-        {activeStep === steps.length ? (
-          <div>
-            <Typography component="div" className={classes.instructions}>
-              <div className={classes.grid}>
-                <Grid container spacing={3}>
-                  <Result
-                    className={classes}
-                    defaultLang={defaultLang}
-                    lang1={lang1}
-                    lang2={lang2}
-                    lang3={lang3}
-                    question={question1}
-                    answer={answer1}
-                    status2={statusLang2}
-                    status3={statusLang3}
-                  />
-                  <Result
-                    className={classes}
-                    defaultLang={defaultLang}
-                    lang1={lang1}
-                    lang2={lang2}
-                    lang3={lang3}
-                    question={question2}
-                    answer={answer2}
-                    status2={statusLang2}
-                    status3={statusLang3}
-                  />
-                  <Result
-                    className={classes}
-                    defaultLang={defaultLang}
-                    lang1={lang1}
-                    lang2={lang2}
-                    lang3={lang3}
-                    question={question3}
-                    answer={answer3}
-                    status2={statusLang2}
-                    status3={statusLang3}
-                  />
-                  <Result
-                    className={classes}
-                    defaultLang={defaultLang}
-                    lang1={lang1}
-                    lang2={lang2}
-                    lang3={lang3}
-                    question={question4}
-                    answer={answer4}
-                    status2={statusLang2}
-                    status3={statusLang3}
-                  />
-                  <Result
-                    className={classes}
-                    defaultLang={defaultLang}
-                    lang1={lang1}
-                    lang2={lang2}
-                    lang3={lang3}
-                    question={question5}
-                    answer={answer5}
-                    status2={statusLang2}
-                    status3={statusLang3}
-                  />
+    <div className="container">
+      <div className={classes.root}>
+        <MobileStepper
+          variant="progress"
+          steps={7}
+          position="static"
+          activeStep={activeStep - 1}
+          className={classes.step}
+        >
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </MobileStepper>
+        <div>
+          {activeStep === steps.length ? (
+            <div>
+              <Typography component="div" className={classes.instructions}>
+                <div className={classes.grid}>
                   <ResultTotal
+                    difficult={"5"}
                     className={classes}
                     question1={question1}
                     question2={question2}
@@ -474,45 +453,100 @@ function MultipleApp() {
                     status2={statusLang2}
                     status3={statusLang3}
                   />
-                </Grid>
-              </div>
-            </Typography>
-            <Button onClick={handleReset}>Làm lại </Button>
-          </div>
-        ) : (
-          <div>
-            <Typography component="div" className={classes.instructions}>
-              {getStepContent(activeStep)}
-            </Typography>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
-              <Button
-                disabled={statusDisabled}
-                variant="contained"
-                color="primary"
-                onClick={submitForm}
-              >
-                {activeStep === steps.length - 1 ? "Submit" : "Next"}
-              </Button>
+                  <Grid container spacing={3}>
+                    <Result
+                      className={classes}
+                      defaultLang={defaultLang}
+                      lang1={lang1}
+                      lang2={lang2}
+                      lang3={lang3}
+                      question={question1}
+                      answer={answer1}
+                      status2={statusLang2}
+                      status3={statusLang3}
+                    />
+                    <Result
+                      className={classes}
+                      defaultLang={defaultLang}
+                      lang1={lang1}
+                      lang2={lang2}
+                      lang3={lang3}
+                      question={question2}
+                      answer={answer2}
+                      status2={statusLang2}
+                      status3={statusLang3}
+                    />
+                    <Result
+                      className={classes}
+                      defaultLang={defaultLang}
+                      lang1={lang1}
+                      lang2={lang2}
+                      lang3={lang3}
+                      question={question3}
+                      answer={answer3}
+                      status2={statusLang2}
+                      status3={statusLang3}
+                    />
+                    <Result
+                      className={classes}
+                      defaultLang={defaultLang}
+                      lang1={lang1}
+                      lang2={lang2}
+                      lang3={lang3}
+                      question={question4}
+                      answer={answer4}
+                      status2={statusLang2}
+                      status3={statusLang3}
+                    />
+                    <Result
+                      className={classes}
+                      defaultLang={defaultLang}
+                      lang1={lang1}
+                      lang2={lang2}
+                      lang3={lang3}
+                      question={question5}
+                      answer={answer5}
+                      status2={statusLang2}
+                      status3={statusLang3}
+                    />
+                  </Grid>
+                </div>
+              </Typography>
+              <Button onClick={handleReset}>Làm lại </Button>
             </div>
-          </div>
-        )}
+          ) : (
+            <div>
+              <Typography component="div" className={classes.instructions}>
+                {getStepContent(activeStep)}
+              </Typography>
+              <div className={classes.wrapButton}>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  Back
+                </Button>
+                <Button
+                  disabled={statusDisabled}
+                  variant="contained"
+                  color="primary"
+                  onClick={submitForm}
+                >
+                  {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+        <Tooltip title="Home" aria-label="Home">
+          <Fab color="primary" href="/" className={classes.absolute}>
+            <HomeIcon />
+          </Fab>
+        </Tooltip>
       </div>
-      <Tooltip title="Home" aria-label="Home">
-        <Fab color="primary" href="/" className={classes.absolute}>
-          <HomeIcon />
-        </Fab>
-      </Tooltip>
     </div>
-  
-    </div>
- );
+  );
 }
 
-export default MultipleApp;
+export default TestStep;
