@@ -94,13 +94,13 @@ function ResultTotal(props) {
       countTrueAnswer2(q3, a3);
       countTrueAnswer2(q4, a4);
       countTrueAnswer2(q5, a5);
-      if (props.difficult >= "10") {
+      if (props.difficult === "10") {
         countTrueAnswer2(q6, a6);
         countTrueAnswer2(q7, a7);
         countTrueAnswer2(q8, a8);
         countTrueAnswer2(q9, a9);
         countTrueAnswer2(q10, a10);
-        if (props.difficult >= "15") {
+        if (props.bonus === "1") {
           countTrueAnswer2(q11, a11);
           countTrueAnswer2(q12, a12);
           countTrueAnswer2(q13, a13);
@@ -114,13 +114,13 @@ function ResultTotal(props) {
       countTrueAnswer3(q3, a3);
       countTrueAnswer3(q4, a4);
       countTrueAnswer3(q5, a5);
-      if (props.difficult >= "10") {
+      if (props.difficult === "10") {
         countTrueAnswer3(q6, a6);
         countTrueAnswer3(q7, a7);
         countTrueAnswer3(q8, a8);
         countTrueAnswer3(q9, a9);
         countTrueAnswer3(q10, a10);
-        if (props.difficult >= "15") {
+        if (props.bonus === "1") {
           countTrueAnswer3(q11, a11);
           countTrueAnswer3(q12, a12);
           countTrueAnswer3(q13, a13);
@@ -134,13 +134,13 @@ function ResultTotal(props) {
       countTrueAnswer(q3, a3);
       countTrueAnswer(q4, a4);
       countTrueAnswer(q5, a5);
-      if (props.difficult >= "10") {
+      if (props.difficult === "10") {
         countTrueAnswer(q6, a6);
         countTrueAnswer(q7, a7);
         countTrueAnswer(q8, a8);
         countTrueAnswer(q9, a9);
         countTrueAnswer(q10, a10);
-        if(props.difficult >= "15"){
+        if(props.bonus === "1"){
           countTrueAnswer(q11, a11);
           countTrueAnswer(q12, a12);
           countTrueAnswer(q13, a13);

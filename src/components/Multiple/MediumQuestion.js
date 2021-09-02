@@ -670,6 +670,7 @@ function MediumQuestion() {
                 <div className={classes.grid}>
                   <ResultTotal
                     difficult={"10"}
+                    bonus={"0"}
                     className={classes}
                     question1={question1}
                     question2={question2}

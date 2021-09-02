@@ -907,7 +907,8 @@ function HighQuestion() {
               <Typography component="div" className={classes.instructions}>
                 <div className={classes.grid}>
                   <ResultTotal
-                    difficult={"15"}
+                    difficult={"10"}
+                    bonus={"1"}
                     className={classes}
                     question1={question1}
                     question2={question2}
